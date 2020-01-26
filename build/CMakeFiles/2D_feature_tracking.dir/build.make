@@ -146,6 +146,9 @@ CMakeFiles/2D_feature_tracking.dir/src/MidTermProject_Camera_Student.cpp.o.provi
 2D_feature_tracking: /Users/eren/OpenCV/opencv/build/lib/libopencv_xfeatures2d.4.2.0.dylib
 2D_feature_tracking: /Users/eren/OpenCV/opencv/build/lib/libopencv_xobjdetect.4.2.0.dylib
 2D_feature_tracking: /Users/eren/OpenCV/opencv/build/lib/libopencv_xphoto.4.2.0.dylib
+2D_feature_tracking: /usr/local/lib/libboost_program_options.dylib
+2D_feature_tracking: /usr/local/lib/libboost_system.dylib
+2D_feature_tracking: /usr/local/lib/libboost_thread-mt.dylib
 2D_feature_tracking: /Users/eren/OpenCV/opencv/build/lib/libopencv_shape.4.2.0.dylib
 2D_feature_tracking: /Users/eren/OpenCV/opencv/build/lib/libopencv_highgui.4.2.0.dylib
 2D_feature_tracking: /Users/eren/OpenCV/opencv/build/lib/libopencv_datasets.4.2.0.dylib
