@@ -17,13 +17,22 @@ See the classroom instruction and code comments for more details on each of thes
 
 Mean neighborhood sizes for each detector are given in below table. According to that table, FAST detector can detect largest number of keypoints where HARRIS detector detects the least. If one need to select top-3 detector from preceding vehicle in the traffic scenario as given here, FAST, BRISK and AKAZE are among the best.
 
-AKAZE	     167.00
-BRISK	     273.13
-FAST	      406.00
-HARRIS	    27.13
-ORB	       119.63
-SIFT	      137.88
-SHITOMASI	 117.00
+Detector  |   #KP    |
+----------|----------|
+AKAZE	    |   167.00 |
+----------|----------|
+BRISK	    |   273.13 |
+----------|----------|
+FAST	     |   406.00 |
+----------|----------|
+HARRIS	   |   27.13  |
+----------|----------|
+ORB	      |   119.63 |
+----------|----------|
+SIFT	     |   137.88 |
+----------|----------|
+SHITOMASI |	 117.00  |
+----------|----------|
 
 - 	Count the number of matched keypoints for all 10 images using all possible combinations of detectors and descriptors. In the matching step, the BF approach is used with the descriptor distance ratio set to 0.8.
 
@@ -33,17 +42,25 @@ Mean matched keypoint numbers and mean matching times of all possible combinatio
 
 Logged time for keypoint detection and descriptor extraction has been entered into a spreadsheet found as "comparision.xls". According to results TOP3 combinations are;
 
-Detector	   Descriptor	   Matcher	   Selector
-FAST	       BRIEF	        MAT_BF	    SEL_KNN
-FAST	       BRIEF	        MAT_BF	    SEL_NN
-FAST	       ORB	          MAT_BF	    SEL_NN
+Detector	  | Descriptor|	 Matcher	 | Selector  |
+-----------|-----------|-----------|-----------|
+FAST	      | BRIEF	    |  MAT_BF	  |  SEL_KNN |
+-----------|-----------|-----------|-----------|
+FAST	      | BRIEF	    |   MAT_BF	 |   SEL_NN |
+-----------|-----------|-----------|-----------|
+FAST	      | ORB	      |   MAT_BF	 |  SEL_NN |
+-----------|-----------|-----------|-----------|
 
 Other than FAST detector, other best combinations are;
 
-Detector	   Descriptor	   Matcher	   Selector
-BRISK	      FREAK	        MAT_BF	    SEL_KNN
-BRISK	      BRIEF	        MAT_BF	    SEL_NN
-AKAZE	      BRIEF	        MAT_FLANN	 SEL_NN
+Detector	  | Descriptor|	 Matcher	 | Selector  |
+-----------|-----------|-----------|-----------|
+BRISK	     | FREAK	     |   MAT_BF	|    SEL_KNN
+-----------|-----------|-----------|-----------|
+BRISK	     | BRIEF	     |   MAT_BF	  |  SEL_NN
+-----------|-----------|-----------|-----------|
+AKAZE	     | BRIEF	     |   MAT_FLANN	| SEL_NN
+-----------|-----------|-----------|-----------|
 
 ## Dependencies for Running Locally
 * cmake >= 2.8
