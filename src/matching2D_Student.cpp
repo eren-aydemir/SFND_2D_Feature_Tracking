@@ -10,23 +10,34 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
     // configure matcher
     bool crossCheck = false;
     cv::Ptr<cv::DescriptorMatcher> matcher;
+    int normType;
+    if (descriptorType.compare("DES_HOG") == 0)
+    {
+        normType = cv::NORM_L2;
+    }
+    else
+    {
+        normType = cv::NORM_HAMMING;
+
+    }
 
     if (matcherType.compare("MAT_BF") == 0)
     {
-        int normType = cv::NORM_HAMMING;
+    
         matcher = cv::BFMatcher::create(normType, crossCheck);
     }
     else if (matcherType.compare("MAT_FLANN") == 0)
     {
-        if (descSource.type() != CV_32F)
-        { // OpenCV bug workaround : convert binary descriptors to floating point due to a bug in current OpenCV implementation
-            descSource.convertTo(descSource, CV_32F);
-            descRef.convertTo(descRef, CV_32F);
+        if (descriptorType.compare("DES_HOG") == 0)
+        {
+            matcher = cv::FlannBasedMatcher::create();
         }
-
-        matcher = cv::DescriptorMatcher::create(cv::DescriptorMatcher::FLANNBASED);
-        cout << "FLANN matching";
-
+        else
+        {
+            const cv::Ptr<cv::flann::IndexParams>& indexParams = cv::makePtr<cv::flann::LshIndexParams>(12, 20, 2);
+            matcher = cv::makePtr<cv::FlannBasedMatcher>(indexParams);
+        }
+        cout << "FLANN matching" << endl;
     }
 
     // perform matching task
@@ -47,7 +58,7 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
         double minDescDistRatio = 0.8;
         for (auto it = knn_matches.begin(); it != knn_matches.end(); ++it)
         {
-            if ((*it)[0].distance < minDescDistRatio * (*it)[1].distance)
+            if (((*it).size() == 2) && ((*it)[0].distance < minDescDistRatio * (*it)[1].distance))
             {
                 matches.push_back((*it)[0]);
             }
@@ -233,8 +244,9 @@ void detKeypointsModern(std::vector<cv::KeyPoint> &keypoints, cv::Mat &img, std:
 
     if (detectorType.compare("FAST") == 0)
     {
-        cv::FastFeatureDetector::DetectorType type = cv::FastFeatureDetector::TYPE_9_16; // TYPE_9_16, TYPE_7_12, TYPE_5_8
-        detector = cv::FastFeatureDetector::create(threshold, bNMS, type);
+        //cv::FastFeatureDetector::DetectorType type = cv::FastFeatureDetector::TYPE_9_16; // TYPE_9_16, TYPE_7_12, TYPE_5_8
+        //detector = cv::FastFeatureDetector::create(threshold, bNMS, type);
+        detector = cv::FastFeatureDetector::create();
     }
     else if (detectorType.compare("BRISK") == 0)
     {
